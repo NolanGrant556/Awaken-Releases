@@ -4,12 +4,33 @@
 
 ## 下载与平台支持
 
-Awaken 支持 macOS 与 Windows 双平台。目前，由于 Apple Developer Program 的申请仍在与 Apple 沟通处理中，现阶段暂仅提供 Windows 安装包。相关问题解决后，将尽快完成 macOS 版本的打包与上线。
+Awaken 支持 macOS 与 Windows 双平台。由于 Apple Developer Program 的申请仍在与 Apple 沟通处理中，macOS 版本暂未完成 Developer ID 签名与 Apple 公证，首次打开时需要按照下方教程手动允许。完成开发者认证后，将替换为正常签名、公证的 macOS 安装包。
 
-当前 Windows 安装包：
+当前安装包：
 
-- [下载 Awaken Setup 0.0.0.exe](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken.Setup.0.0.0.exe)
-- SHA-256：`553ee68f985e321261cd9d8cfdb85d26d06826da45ab2bc8cf2c3df79f420ba0`
+- [macOS（Apple Silicon／M 系列）](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken-0.0.0-arm64.dmg)
+- [macOS（Intel）](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken-0.0.0-x64.dmg)
+- [Windows](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken.Setup.0.0.0.exe)
+
+### macOS 安装与首次打开教程
+
+1. 下载并打开与电脑架构对应的 Awaken `.dmg` 安装包。
+2. 将 Awaken 拖入“应用程序”文件夹。
+3. 打开“应用程序”，右键点击 Awaken，选择“打开”。
+4. 如果系统仍然阻止运行，请进入“系统设置 → 隐私与安全性”。
+5. 在安全提示中找到 Awaken，点击“仍要打开”。
+6. 再次确认打开，即可正常启动 Awaken。
+
+> 请勿全局关闭 macOS 的 Gatekeeper 安全保护。以上操作只允许打开本次下载的 Awaken 应用。
+
+<details>
+<summary>文件 SHA-256 校验值</summary>
+
+- macOS Apple Silicon：`ac06437d0de8bebdc229ca47279e8a7ae2b9b7e9c2268aaabee028dfb03d368b`
+- macOS Intel：`eae8417a1b1807ddf73c6b74b7da73592f7c1f00a556c92baafe2110dca6e101`
+- Windows：`553ee68f985e321261cd9d8cfdb85d26d06826da45ab2bc8cf2c3df79f420ba0`
+
+</details>
 
 ## 产品简介
 
