@@ -8,8 +8,6 @@ Awaken 支持 macOS 与 Windows 双平台。由于 Apple Developer Program 的�
 
 当前安装包：
 
-> Windows 版本当前比 macOS 落后一个版本，请优先使用 macOS。（2026/07/17 更新）
-
 - [macOS（Apple Silicon／M 系列）](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken-0.0.0-arm64.dmg)
 - [macOS（Intel）](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken-0.0.0-x64.dmg)
 - [Windows](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken.Setup.0.0.0.exe)
