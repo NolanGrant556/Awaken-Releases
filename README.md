@@ -38,8 +38,8 @@ Awaken 支持 macOS 与 Windows 双平台。由于 Apple Developer Program 的�
 <details>
 <summary>文件 SHA-256 校验值</summary>
 
-- macOS Apple Silicon：`01da630344c8285fc446ce2fa726f80de8f45e722fc0913ec3cdee66e436aa9a`
-- macOS Intel：`5e643c657b04b96033be16e1dbf44d748bbdc5ad213da84aaf6383544c5bfaa5`
+- macOS Apple Silicon：`f31a849feba394b0d5bf1a140dd786ca88fab050cb95d974e86e51392ffe00c6`
+- macOS Intel：`b95ed6b6c99258ec605f82c38a1503df6c9e79e2311ebb36fc4b2966d75af6e6`
 - Windows：`cbb66a577ce0784abaf6ad929882561dfb5facc2a4c9ce4dcb777e23f146fa89`
 
 </details>
