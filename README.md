@@ -1,143 +1,188 @@
-# Awaken —— 为真实企业业务而生的本地桌面智能体
+# Awaken —— 为真实工作而生的本地桌面 Agent
 
 > 不止回答问题，更能在本机把工作做完。
 
 ## 下载与平台支持
 
-Awaken 支持 macOS 与 Windows 双平台。由于 Apple Developer Program 的申请仍在与 Apple 沟通处理中，macOS 版本暂未完成 Developer ID 签名与 Apple 公证，首次打开时需要按照下方教程手动允许。完成开发者认证后，将替换为正常签名、公证的 macOS 安装包。
+Awaken 支持 **macOS** 与 **Windows**。
 
-当前安装包：
+## 使用前配置
 
-- [macOS（Apple Silicon／M 系列）](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken-0.0.0-arm64.dmg)
-- [macOS（Intel）](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken-0.0.0-x64.dmg)
-- [Windows](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken.Setup.0.0.0.exe)
+Awaken 的模型能力由用户按需接入。首次使用前，请先在「设置 → 模型」中配置至少一个可用的大语言模型供应商并添加模型；发起任务时，可以在当前会话中选择模型并调整推理强度。
 
-### macOS 安装与首次打开教程
+<p align="center">
+  <img src="assets/demo/01-llm-settings.gif" alt="LLM 配置、会话模型选择与推理强度调节" width="88%">
+</p>
 
-1. 下载并打开与电脑架构对应的 Awaken `.dmg` 安装包。
-2. 将 Awaken 拖入“应用程序”文件夹。
-3. 打开“终端”，执行以下命令清除本次下载产生的隔离属性并启动 Awaken：
+如需使用图片或视频生成功能，请在「设置 → 工具」中分别完成对应供应商与模型的配置。配置完成后，这些能力将作为独立工具，由主 Agent 根据任务目标按需调用。
 
-   ```bash
-   xattr -dr com.apple.quarantine "/Applications/Awaken.app"
-   open "/Applications/Awaken.app"
-   ```
-
-4. 如果仍然提示“Awaken.app 已损坏，无法打开”，请执行以下命令为本机中的 Awaken 副本添加临时签名，然后重新启动：
-
-   ```bash
-   codesign --force --deep --sign - "/Applications/Awaken.app"
-   xattr -dr com.apple.quarantine "/Applications/Awaken.app"
-   open "/Applications/Awaken.app"
-   ```
-
-> 仅对从本仓库官方 Release 下载的安装包执行以上命令。请勿全局关闭 macOS 的 Gatekeeper 安全保护；临时签名只作用于当前电脑中的 Awaken 副本，不能替代 Developer ID 签名与 Apple 公证。
-
-<details>
-<summary>文件 SHA-256 校验值</summary>
-
-- macOS Apple Silicon：`f31a849feba394b0d5bf1a140dd786ca88fab050cb95d974e86e51392ffe00c6`
-- macOS Intel：`b95ed6b6c99258ec605f82c38a1503df6c9e79e2311ebb36fc4b2966d75af6e6`
-- Windows：`cbb66a577ce0784abaf6ad929882561dfb5facc2a4c9ce4dcb777e23f146fa89`
-
-</details>
+<p align="center">
+  <img src="assets/demo/02-media-tools.gif" alt="图片与视频生成工具配置" width="88%">
+</p>
 
 ## 产品简介
 
-### 把任务交给 Awaken，自主执行，唤醒自由
-
-Awaken 是一款基于传统企业真实业务场景针对性开发的本地优先桌面智能体。它不是只提供建议的通用聊天助手，而是从财务、人力资源、采购、销售、市场、运营、行政法务等部门每天真实发生的工作出发，让 AI Agent 直接进入用户的本地工作环境，自主读取和处理 Excel、PDF、PPT、Word 等业务材料。
-
-用户只需交代任务，Awaken 便能自主完成“理解材料 → 提取信息 → 分析判断 → 结构化整理 → 生成正式交付物”的完整工作链路，将原本需要反复打开文件、复制数据和整理格式的工作，转化为可追踪、可复核、可直接使用的成果。
-
-**真正的亮点，不只是 AI 能回答问题，而是它能在真实业务场景中把工作做完。**
-
 ### 是什么？
 
-Awaken 是一款本地优先的桌面智能体应用：用户在自己电脑上和一个具备真实 Shell、真实文件系统、真实办公软件调用能力的 AI Agent 对话，让它直接在本机完成多轮、可追溯的实际工作，而不是一个只会聊天建议、或者活在云端沙盒里“假装干活”的助手。它能解决每个部门格式各异的原始材料（Excel/PDF/PPT/Word），把“提取信息 → 结构化整理 → 生成正式交付物”这条链路自动跑完。同一套 Agent 能力，在不同部门文件夹里长出完全不同的垂直场景。
+Awaken 是一个本地运行的桌面 Agent。用户既可以直接发起对话，也可以选择项目文件夹，将不同业务划分为独立的工作场景。应用、工作空间、文件操作和交付物都组织在用户电脑上；LLM、搜索、生图、视频等能力则由用户按需配置接入。
+
+不同于套用现成的 Agent 框架，Awaken 以我们自研的 **Agent Core** 与 **Tool Runtime** 为底座。从上下文构建、模型调用、任务推进，到工具注册、执行反馈和失败恢复，核心执行链均由自身实现并统一管理。每次模型请求的 Token 用量、缓存命中、调用延迟与成本都会留痕，便于围绕真实任务效果持续调优模型、推理强度和缓存策略。
+
+Awaken 要解决的核心问题，是让 AI 不只给出建议，而是能够理解真实资料、调用 Skills 与工具、持续推进任务，最终形成可检查、可继续修改的工作成果。
 
 ### 面向谁？
 
-#### 部门的垂直场景举例
+Awaken 主要面向企业中的经营管理、财务、采购、销售、市场、运营、行政与法务等 Work 场景。它适合的不是简单的“一问一答”，而是需要 Agent 在多个文件、系统、多项判断和多种工具之间持续推进，并完成一项真实工作的场景。
 
-- **财务部：** 月末上百张报销发票 PDF 混在一个文件夹里，Agent 逐张提取金额/日期/事由，对照报销标准和历史记录，自动标出超标准、疑似重复报销的单据，生成一份“异常清单+汇总台账”，财务只需要复核异常项，不用把每张单据都翻一遍。
-- **人力资源部：** 一个岗位收到 100+ 份简历 PDF，Agent 逐份解析学历/年限/技能匹配度，生成一份结构化候选人对比表并按匹配度排序，HR 只看排名前 10，不用一份份打开简历。
-- **业务运营部：** 总部汇总的全国门店销售/库存 Excel，Agent 按区域拆分出“谁涨谁跌、哪些门店库存告警”，生成分区域简报，发送前弹出确认框列出全部目标群和文案，一次性发到 30+ 个区域钉钉/飞书群。
-- **市场部：** 一场活动结束后，各投放渠道各自导出的效果 Excel/PDF 散落一堆，Agent 汇总成一份带 ROI 对比、渠道排名的复盘 PPT，省去人工对齐口径、逐个渠道拷数字做图表的过程。
-- **销售部：** 产品价目表 + 客户折扣规则 + 一份意向客户名单，一句话生成 20 份定制化报价 PDF（每份价格、条款按客户单独计算），销售不用一个个复制模板改数字。
-- **采购部：** 5 家供应商各自格式不同的报价 PDF，Agent 提取每家的价格/交期/规格，生成统一格式的比价表，并标出明显偏离历史均价的异常报价提醒核实——采购比价这件“格式对不齐”的苦活儿被直接接管。
-- **客户服务部：** 本月客诉记录导出表，Agent 按问题类型自动分类，生成“高频问题+改进建议”周报；对需要回访的客户，先生成回访消息清单，发送前照样有确认框，不会自己联系客户。
-- **行政与法务部：** 批量扫描本月新签合同 PDF，提取金额/期限/付款节点/违约条款，生成合同台账，并标出即将到期需要续签的合同，通知对应负责人确认——合同关键信息全靠人工翻页摘抄的活儿被接管。
-- **经营管理部：** 到了月末，把上面 8 个部门这个月各自更新的材料汇总成一份经营分析 PPT 初稿，并标注哪些部门数据还没交，这是这些部门场景的“上层视角”，不是取代它们。
+## 核心演示场景
 
-### 主要功能
+### 场景一：企业经营风险分析
 
-#### 产品主界面
+以模拟数据集「Nolan 实业有限公司」为基础，进入对应项目后，选择适合复杂分析的 LLM 和推理强度。
 
-三栏桌面工作台：左侧项目/线程，中间 Workbench（任务输入、Agent 执行叙事、终态与交付物），右侧开发中，下一版本将上线。
+主 Agent 读取企业公共资料及财务、销售、采购、运营、市场、法务等部门文件，并调度多个 Subagent，分别完成数据核对、经营异常分析、风险检查和改进机会评审。各 Subagent 返回结果后，由主 Agent 汇总跨部门关联问题，形成企业经营风险分析报告、管理层汇报 PPT 和风险跟踪表。
+
+这个场景重点展示 Awaken 如何组织模型、Skills、工具和 Subagent，共同完成一次复杂的企业经营分析任务。
+
+#### 第一步：创建项目并选择业务资料文件夹
 
 <p align="center">
-  <img src="assets/product-01.jpg" alt="Awaken 产品主界面" width="49%">
-  <img src="assets/product-02.gif" alt="Awaken 工作台交互" width="49%">
+  <img src="assets/demo/03-project-workspace.gif" alt="创建项目并选择业务资料文件夹" width="88%">
 </p>
 
-#### 桌宠界面
-
-Settings 选择宠物后，可唤醒独立透明浮窗；随 Agent 运行状态切换动画，并提供 running / waiting / failed 等通知气泡，点击可回到对应 thread，运行中可 Stop。
+#### 第二步：按需启用全局 Skills、项目 Skills、内置 Skills 与 Agents Skills
 
 <p align="center">
-  <img src="assets/product-03.jpg" alt="Awaken 桌宠设置" width="49%">
-  <img src="assets/product-04.gif" alt="Awaken 桌宠交互" width="49%">
+  <img src="assets/demo/04-skills.gif" alt="选择并启用 Skills" width="88%">
 </p>
 
-#### Agent 提问
-
-当 Agent 执行中缺少会显著影响结果的关键选择时，会暂停并向用户提问，获取更仔细的信息。
+#### 第三步：发起任务
 
 <p align="center">
-  <img src="assets/product-05.gif" alt="Awaken Agent 提问" width="88%">
+  <img src="assets/demo/05-task-start.gif" alt="发起企业经营风险分析任务" width="88%">
 </p>
 
-#### 交付物卡片：Work 文档本地即时打开
-
-Agent 执行任务结束后，交付物会以卡片形式出现在最终回答下方。点击即可在本机用系统默认应用打开（Word / Excel / PPT / PDF / Markdown 等）。
+#### 第四步：Agent 主动提问，用户继续补充要求
 
 <p align="center">
-  <img src="assets/product-06.gif" alt="Awaken 交付物卡片" width="88%">
+  <img src="assets/demo/06-agent-question.gif" alt="Agent 主动提问" width="88%">
 </p>
 
-#### Skill 界面
-
-在 Settings 管理项目 skills 和全局 skills，并且可以在输入框选择。
+#### 第五步：主 Agent 调度多个 Subagent 协同分析
 
 <p align="center">
-  <img src="assets/product-07.jpg" alt="Awaken 项目 Skills" width="32%">
-  <img src="assets/product-08.jpg" alt="Awaken 全局 Skills" width="32%">
-  <img src="assets/product-09.jpg" alt="Awaken 输入框选择 Skill" width="32%">
+  <img src="assets/demo/07-subagent.gif" alt="主 Agent 调度多个 Subagent" width="88%">
 </p>
 
-#### 连接器界面
-
-在设置中管理 MCP、CLI 等连接器，用于扩展 Awaken 的对外工作能力。
+#### 第六步：交付并查看 Word、Excel 与 PPT 成果
 
 <p align="center">
-  <img src="assets/product-10.jpg" alt="Awaken MCP 连接器" width="49%">
-  <img src="assets/product-11.jpg" alt="Awaken CLI 连接器" width="49%">
+  <img src="assets/demo/08-deliverables.gif" alt="查看 Word、Excel 与 PPT 交付物" width="88%">
 </p>
 
-#### 模型界面
+### 场景二：服装制造业多模态应用
 
-Settings > 模型：配置模型供应商、设置 LLM 上下文大小、输出长度。
+主 Agent 理解客户 TP 资料后，调用图片生成工具输出服装款式模特图；用户选定合适的图片后，Agent 再将其作为视觉素材，调用视频生成工具输出产品展示短片。
+
+这个场景体现的不是两个孤立的生图、视频按钮，而是同一个桌面 Agent 根据任务目标，自主判断并调用不同模态工具，完成一条连续工作链。
+
+#### 第一步：从右侧文件栏浏览文件并添加到输入框
 
 <p align="center">
-  <img src="assets/product-12.jpg" alt="Awaken 模型设置" width="49%">
-  <img src="assets/product-13.gif" alt="Awaken 模型配置" width="49%">
+  <img src="assets/demo/09-add-file.gif" alt="从右侧文件栏添加文件" width="88%">
 </p>
 
-#### 模型额度界面
-
-Workbench 提供余额/额度入口。点击后向对应供应商接口实时查询并展示。
+#### 第二步：主 Agent 理解客户 TP 并生成多张图片
 
 <p align="center">
-  <img src="assets/product-14.jpg" alt="Awaken 模型额度" width="88%">
+  <img src="assets/demo/10-image-generation.gif" alt="基于客户 TP 生成图片" width="88%">
 </p>
+
+#### 第三步：用户确认后继续生成视频
+
+<p align="center">
+  <img src="assets/demo/11-video-generation.gif" alt="基于选定图片继续生成视频" width="88%">
+</p>
+
+## 其他功能
+
+除上述两个核心场景体现的能力外，Awaken 还具备以下功能。
+
+### Computer Use
+
+Agent 可以识别并操作电脑界面，通过点击、输入、滚动和快捷键等方式完成桌面任务。
+
+<p align="center">
+  <img src="assets/demo/12-computer-use.gif" alt="Computer Use" width="88%">
+</p>
+
+### 记忆功能
+
+支持跨会话记忆，以及通过 Dream 对记忆进行自动整理和维护。
+
+<p align="center">
+  <img src="assets/demo/13-memory.gif" alt="记忆功能" width="88%">
+</p>
+
+### 定时任务
+
+支持创建、编辑、启停、立即执行和取消周期性或指定时间任务。
+
+<p align="center">
+  <img src="assets/demo/14-scheduled-tasks.gif" alt="定时任务" width="88%">
+</p>
+
+### ACP 智能体协作
+
+支持接入和调度外部智能体，扩展 Awaken 的协作边界。
+
+<p align="center">
+  <img src="assets/demo/15-acp.gif" alt="ACP 智能体协作" width="88%">
+</p>
+
+### 上下文看板
+
+可以查看当前上下文使用情况与缓存命中情况。
+
+<p align="center">
+  <img src="assets/demo/16-context-dashboard.gif" alt="上下文看板" width="88%">
+</p>
+
+### 连接器
+
+支持配置 MCP 与 CLI 连接器，扩展 Agent 可以调用的外部系统和工具。
+
+<p align="center">
+  <img src="assets/demo/17-connectors.gif" alt="MCP 与 CLI 连接器" width="88%">
+</p>
+
+### 桌面宠物
+
+通过独立桌面浮窗展示 Agent 的运行、等待、完成和失败状态，并可快速返回对应任务。
+
+<p align="center">
+  <img src="assets/demo/18-desktop-pet.gif" alt="桌面宠物" width="88%">
+</p>
+
+### Web 搜索
+
+Agent 可以调用网络搜索工具，获取、筛选和整理外部信息。
+
+### API 用量查询
+
+可以实时查询用户所配置服务的 API 或 Coding Plan 额度情况。
+
+<p align="center">
+  <img src="assets/demo/19-api-usage.gif" alt="API 用量查询" width="88%">
+</p>
+
+## 相比初赛 Demo 的升级
+
+自 [7 月 14 日发布的初赛帖](https://forum.trae.cn/t/topic/149989?u=nolan)之后，Awaken 从以本地文件处理、Office 交付物、Skills、连接器和基础模型配置为主的 Demo，进一步完成了以下升级：
+
+- 从以项目文件夹为主的场景演示，升级为「直接对话 + 可选项目 + 多文件夹项目」的完整任务入口；
+- 从单 Agent 顺序执行，升级为主 Agent 调度多个只读 Subagent 并行分析，并支持查看状态、执行详情、结果和取消任务；
+- 从基础 LLM 配置，升级为多种模型接入、会话级推理强度，以及由主 Agent 统一调用的图片和视频生成工具；
+- 新增右侧文件栏，支持文件浏览、内容预览、添加到当前对话和快速打开结果，让资料调用与交付核验都能在同一工作界面完成；
+- 新增长期记忆、Dream 自动整理、定时任务、ACP 智能体协作和 Computer Use，进一步扩展 Awaken 持续处理工作和操作真实桌面环境的能力；
+- 持续优化整体 UI 与桌面交互体验，打磨 Workbench、文件工作区、模型设置、Skills 管理、Subagent 详情及交付物展示，让界面层级更清晰、操作反馈更直观、核心功能更易用。
