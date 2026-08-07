@@ -14,7 +14,7 @@ Awaken 的模型能力由用户按需接入。首次使用前，请先在「设�
   <img src="assets/demo/01-llm-settings.gif" alt="LLM 配置、会话模型选择与推理强度调节" width="88%">
 </p>
 
-如需使用图片或视频生成功能，请在「设置 → 工具」中分别完成对应供应商与模型的配置。配置完成后，这些能力将作为独立工具，由主 Agent 根据任务目标按需调用。
+如需使用图片或视频生成功能，请在 Agent Plan 中单独配置对应供应商与模型。配置完成后，这些能力将作为独立工具，由主 Agent 根据任务目标按需调用。
 
 <p align="center">
   <img src="assets/demo/02-media-tools.gif" alt="图片与视频生成工具配置" width="88%">
