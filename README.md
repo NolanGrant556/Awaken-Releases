@@ -6,6 +6,9 @@
 
 Awaken 支持 **macOS** 与 **Windows**。
 
+- **Windows：** [下载 Awaken Setup 0.0.0](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken.Setup.0.0.0.exe)
+- **macOS（Apple Silicon / Intel）：** 安装包即将提供。
+
 ## 使用前配置
 
 Awaken 的模型能力由用户按需接入。首次使用前，请先在「设置 → 模型」中配置至少一个可用的大语言模型供应商并添加模型；发起任务时，可以在当前会话中选择模型并调整推理强度。
