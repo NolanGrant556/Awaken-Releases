@@ -7,7 +7,7 @@
 Awaken 支持 **macOS** 与 **Windows**。
 
 - **Windows：** [下载 Awaken Setup 0.0.0](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken.Setup.0.0.0.exe)
-- **macOS（Apple Silicon，M1/M2/M3/M4）：** [下载 Awaken 0.0.0 arm64](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken-0.0.0-arm64.dmg)
+- **macOS（Apple Silicon）：** [下载 Awaken 0.0.0 arm64](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken-0.0.0-arm64.dmg)
 - **macOS（Intel）：** [下载 Awaken 0.0.0 x64](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken-0.0.0-x64.dmg)
 
 ### macOS 首次安装
