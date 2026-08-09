@@ -7,7 +7,41 @@
 Awaken 支持 **macOS** 与 **Windows**。
 
 - **Windows：** [下载 Awaken Setup 0.0.0](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken.Setup.0.0.0.exe)
-- **macOS（Apple Silicon / Intel）：** 安装包即将提供。
+- **macOS（Apple Silicon，M1/M2/M3/M4）：** [下载 Awaken 0.0.0 arm64](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken-0.0.0-arm64.dmg)
+- **macOS（Intel）：** [下载 Awaken 0.0.0 x64](https://github.com/NolanGrant556/Awaken-Releases/releases/download/v0.0.0/Awaken-0.0.0-x64.dmg)
+
+### macOS 首次安装
+
+由于 Apple Developer Program 的申请仍在与 Apple 沟通处理中，macOS 版本暂未完成 Developer ID 签名与 Apple 公证。请只从本页面下载，并在首次打开时使用以下任一方法手动允许。
+
+先打开 DMG，将 `Awaken.app` 拖入“应用程序（Applications）”文件夹，再尝试打开一次。
+
+#### 方法一：在“隐私与安全”中允许（推荐）
+
+1. 打开“系统设置 → 隐私与安全”。
+2. 向下滚动到“安全性”，找到 Awaken 被阻止的提示。
+3. 点击“仍要打开（Open Anyway）”，使用登录密码或 Touch ID 确认，再点击“打开”。
+
+“仍要打开”按钮通常只会在尝试打开 Awaken 后的一段时间内出现。成功允许一次后，后续可以正常双击打开。
+
+详细说明可参考 [Apple 官方的“打开来自身份不明开发者的 App”指南](https://support.apple.com/guide/mac-help/mh40616/mac)。
+
+#### 方法二：使用终端命令
+
+确认 `Awaken.app` 已放入“应用程序”文件夹后，打开“终端”，执行：
+
+```bash
+sudo xattr -rd com.apple.quarantine /Applications/Awaken.app
+```
+
+输入 Mac 登录密码后按回车（终端不会显示输入的密码），再重新打开 Awaken。该命令只移除 Awaken 的下载隔离属性，不会全局关闭 macOS Gatekeeper；请勿对来源不明的应用执行。
+
+### macOS SHA-256
+
+```text
+0439d5a56811ee3bb8fc98e5fc12385b79f9f2e7a588cbe5c5ed4688ea534ed3  Awaken-0.0.0-arm64.dmg
+2cd89a9248218842391190c9888d92dbf9a9c33133c6d595caff07b9d2e62a0f  Awaken-0.0.0-x64.dmg
+```
 
 ## 使用前配置
 
