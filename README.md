@@ -12,7 +12,7 @@ Awaken 支持 **macOS** 与 **Windows**。
 
 ### macOS 首次安装
 
-由于 Apple Developer Program 的申请仍在与 Apple 沟通处理中，macOS 版本暂未完成 Developer ID 签名与 Apple 公证。请只从本页面下载，并在首次打开时使用以下任一方法手动允许。
+macOS 版本已使用完整的 ad-hoc 签名，但由于 Apple Developer Program 的申请仍在与 Apple 沟通处理中，暂未完成 Developer ID 签名与 Apple 公证。请只从本页面下载，并在首次打开时使用以下任一方法手动允许。
 
 先打开 DMG，将 `Awaken.app` 拖入“应用程序（Applications）”文件夹，再尝试打开一次。
 
@@ -31,16 +31,18 @@ Awaken 支持 **macOS** 与 **Windows**。
 确认 `Awaken.app` 已放入“应用程序”文件夹后，打开“终端”，执行：
 
 ```bash
-sudo xattr -rd com.apple.quarantine /Applications/Awaken.app
+sudo xattr -cr /Applications/Awaken.app
 ```
 
-输入 Mac 登录密码后按回车（终端不会显示输入的密码），再重新打开 Awaken。该命令只移除 Awaken 的下载隔离属性，不会全局关闭 macOS Gatekeeper；请勿对来源不明的应用执行。
+输入 Mac 登录密码后按回车（终端不会显示输入的密码），再重新打开 Awaken。该命令只清除 `Awaken.app` 自身的扩展属性（包括下载隔离与来源标记），不会全局关闭 macOS Gatekeeper；请勿对来源不明的应用执行。
+
+如果仍看到“Awaken.app 已损坏”，请先删除旧的 Awaken 副本，重新从本页面下载当前安装包，再按上述步骤操作。
 
 ### macOS SHA-256
 
 ```text
-0439d5a56811ee3bb8fc98e5fc12385b79f9f2e7a588cbe5c5ed4688ea534ed3  Awaken-0.0.0-arm64.dmg
-2cd89a9248218842391190c9888d92dbf9a9c33133c6d595caff07b9d2e62a0f  Awaken-0.0.0-x64.dmg
+bd5374329b6930a7e3c229c82e3acb43a1736ab2b689104a7c41d99398c6a697  Awaken-0.0.0-arm64.dmg
+6ef7e4fe99e19e7914df3cf4debaf188b2248064e1fc3110fd3eefa1ef53902c  Awaken-0.0.0-x64.dmg
 ```
 
 ## 使用前配置
