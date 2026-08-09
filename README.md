@@ -12,7 +12,10 @@ Awaken 支持 **macOS** 与 **Windows**。
 
 ### macOS 首次安装
 
-macOS 版本已使用完整的 ad-hoc 签名，但由于 Apple Developer Program 的申请仍在与 Apple 沟通处理中，暂未完成 Developer ID 签名与 Apple 公证。请只从本页面下载，并在首次打开时使用以下任一方法手动允许。
+> [!IMPORTANT]
+> 首次打开 Awaken 时，macOS 可能提示“Awaken.app 已损坏，无法打开”，并建议将它移到废纸篓。文件本身并未损坏；这是因为当前下载包尚未完成 Apple 公证，系统无法验证其 Apple 签名与公证状态。请不要点击“移到废纸篓”，按照下方任一方法完成安装后即可正常使用。
+
+Awaken 的正式 macOS 安装包已经完成 Developer ID Application 签名、Hardened Runtime 和 entitlements 配置，并已提交 Apple Notary Service。目前正在等待 Apple 完成公证处理；公证结果返回并更新下载包后，将不再需要下方的手动允许步骤。请只从本页面下载安装包。
 
 先打开 DMG，将 `Awaken.app` 拖入“应用程序（Applications）”文件夹，再尝试打开一次。
 
@@ -36,7 +39,7 @@ sudo xattr -cr /Applications/Awaken.app
 
 输入 Mac 登录密码后按回车（终端不会显示输入的密码），再重新打开 Awaken。该命令只清除 `Awaken.app` 自身的扩展属性（包括下载隔离与来源标记），不会全局关闭 macOS Gatekeeper；请勿对来源不明的应用执行。
 
-如果仍看到“Awaken.app 已损坏”，请先删除旧的 Awaken 副本，重新从本页面下载当前安装包，再按上述步骤操作。
+如果看到“Awaken.app 已损坏”的提示，请点击“取消”，不要将 Awaken 移到废纸篓，然后使用上述任一方法继续安装。
 
 ### macOS SHA-256
 
