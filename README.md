@@ -183,6 +183,10 @@ Agent 可以识别并操作电脑界面，通过点击、输入、滚动和快�
 
 Agent 可以调用网络搜索工具，获取、筛选和整理外部信息。
 
+<p align="center">
+  <img src="assets/demo/19-web-search.png" alt="Web 搜索" width="88%">
+</p>
+
 ### API 用量查询
 
 可以实时查询用户所配置服务的 API 或 Coding Plan 额度情况。
